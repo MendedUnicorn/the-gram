@@ -1,0 +1,56 @@
+.post {
+  border-radius: 5px;
+  min-width: 360px;
+  max-width: 500px;
+  margin: 50px auto;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.username {
+  line-height: 40px;
+}
+.header img {
+  height: 40px;
+  border-radius: 50%;
+}
+
+.image-post {
+  width: 100%;
+}
+
+.post div.username {
+  height: 40px;
+  margin: auto 10px;
+  color: black;
+}
+
+.buttons,
+p {
+  padding: 0 10px;
+}
+
+.reply {
+  display: flex;
+  padding: 0 10px 20px 10px;
+}
+.reply input {
+  flex: 1;
+}
+
+.post-time {
+  font-size: 12px;
+  color: grey;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.material-icons {
+  cursor: pointer;
+  padding: 5px;
+}

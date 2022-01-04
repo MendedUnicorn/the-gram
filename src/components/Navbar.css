@@ -1,0 +1,41 @@
+.navbar {
+  display: flex;
+  background-color: var(--main-color);
+  height: 100px;
+}
+
+.navbar img {
+  height: 50%;
+  margin: auto 5px;
+  border-radius: 50%;
+}
+
+.navbar h1 {
+  margin: auto auto auto 50px;
+  color: white;
+}
+.navbar h2 {
+  margin: auto 0;
+  color: white;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar li {
+  list-style: none;
+  text-decoration: none;
+  margin: auto 0;
+  padding: 10px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar a.active {
+  color: black;
+}

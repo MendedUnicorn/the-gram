@@ -11,6 +11,8 @@ import { useDocument } from '../hooks/useDocument';
 import { useFirestore } from '../hooks/useFirestore';
 import Buttons from './Buttons';
 import CommentInput from './CommentInput';
+import { useAuthContext } from '../hooks/useAuthContext';
+
 import './PostModal.css';
 
 export default function PostModal() {
@@ -19,8 +21,8 @@ export default function PostModal() {
   const navigate = useNavigate();
   const location = useLocation();
   const { deleteDocument } = useFirestore('posts');
-  // const location = useLocation();
-  // console.log(!!location?.state?.fromHome);
+  const { user } = useAuthContext();
+  console.log('user', user);
 
   if (error) {
     return <div className='error'>{error}</div>;
@@ -60,9 +62,11 @@ export default function PostModal() {
           <div className='user'>
             <img src={newDoc?.profilePic} className='profile-pic' alt='' />{' '}
             <p>{newDoc?.userName}</p>
-            <button className='btn' onClick={handleDelete}>
-              Delete Post
-            </button>
+            {user.uid === newDoc?.uid && (
+              <button className='btn' onClick={handleDelete}>
+                Delete Post
+              </button>
+            )}
           </div>
           <div className='description'>{newDoc?.description}</div>
           <div className='comments'>

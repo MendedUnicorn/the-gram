@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useLogout } from '../hooks/useLogout';
 import './Navbar.css';
@@ -15,9 +15,15 @@ export default function Navbar() {
 
   return (
     <nav className='navbar'>
-      <h1>The Gram</h1>
-      {user && <h2>Hello, {user?.displayName}</h2>}
-      {user && <img src={user?.photoURL} alt='profile pic' />}
+      <Link to='/'>
+        <h1>The Gram</h1>
+      </Link>
+      {user && (
+        <Link to={`/profile/${user.uid}`}>
+          <h2>Hello, {user?.displayName}</h2>
+          <img src={user?.photoURL} alt='profile pic' />
+        </Link>
+      )}
       <ul>
         <li>
           <NavLink to='/'>Home</NavLink>

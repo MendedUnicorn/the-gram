@@ -47,7 +47,7 @@
 }
 
 .btn {
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .description {
@@ -55,4 +55,8 @@
 }
 .description input {
   flex: 1;
+}
+
+.file-input {
+  cursor: pointer;
 }

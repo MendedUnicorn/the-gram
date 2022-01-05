@@ -10,10 +10,13 @@
   border-radius: 50%;
 }
 
-.navbar h1 {
-  margin: auto auto auto 50px;
+.navbar a:first-child {
   color: white;
+  margin: auto auto auto 20px;
 }
+.navbar a {
+}
+
 .navbar h2 {
   margin: auto 0;
   color: white;

@@ -54,3 +54,23 @@ p {
   cursor: pointer;
   padding: 5px;
 }
+
+.delete {
+  color: black;
+}
+.comment {
+  display: flex;
+  align-items: center;
+  height: 1em;
+  padding: 5px;
+}
+
+.comment span {
+  margin-left: auto;
+  color: red;
+  display: none;
+}
+
+.comment:hover span {
+  display: inline;
+}

@@ -37,6 +37,10 @@
   display: inline;
   border-radius: 50%;
 }
+.user .btn {
+  margin-left: auto;
+  margin-right: 10px;
+}
 
 .user p {
   display: inline;

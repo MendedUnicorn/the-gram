@@ -8,6 +8,7 @@ import NewPost from './pages/new-post/NewPost';
 import { useAuthContext } from './hooks/useAuthContext';
 import Explore from './pages/explore/Explore';
 import PostModal from './components/PostModal';
+import Profile from './pages/profile/Profile';
 
 function App() {
   const { user, authIsReady } = useAuthContext();
@@ -33,6 +34,8 @@ function App() {
               path='/explore'
               element={user ? <Explore /> : <Navigate to='/login' />}
             />
+
+            <Route path='/profile/:uid' element={<Profile />} />
 
             <Route
               path='/p/:id'

@@ -17,6 +17,7 @@ export default function CommentInput({ data }) {
       createdAt: Timestamp.fromDate(new Date()),
       photoURL: user.photoURL,
       id: Math.floor(Math.random() * new Date()),
+      uid: user.uid,
     };
 
     await updateDocument(data.id, {

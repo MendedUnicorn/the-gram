@@ -1,5 +1,6 @@
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { storage } from '../../firebase/config';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useFirestore } from '../../hooks/useFirestore';
@@ -12,6 +13,7 @@ export default function NewPost() {
 
   const { addDocument } = useFirestore('posts');
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleFile = (e) => {
     e.preventDefault();
@@ -55,6 +57,7 @@ export default function NewPost() {
     };
 
     await addDocument(documentToAdd);
+    navigate('/');
   };
 
   return (

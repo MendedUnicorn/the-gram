@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useLogout } from '../hooks/useLogout';
 import './Navbar.css';
@@ -6,7 +6,13 @@ import './Navbar.css';
 export default function Navbar() {
   const { logout, isPending, error } = useLogout();
   const { user } = useAuthContext();
-  console.log(user);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <nav className='navbar'>
       <h1>The Gram</h1>
@@ -20,7 +26,7 @@ export default function Navbar() {
           <NavLink to='/post'>Post</NavLink>
         </li>
         <li>
-          <NavLink to='/'>Explore</NavLink>
+          <NavLink to='/explore'>Explore</NavLink>
         </li>
         {!user && (
           <>
@@ -35,7 +41,7 @@ export default function Navbar() {
         {user && (
           <li>
             {!isPending && (
-              <button onClick={logout} className='btn'>
+              <button onClick={handleLogout} className='btn'>
                 Logout
               </button>
             )}

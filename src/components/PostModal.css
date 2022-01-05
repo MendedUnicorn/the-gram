@@ -1,0 +1,48 @@
+.background {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(59, 54, 54, 0.818);
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: flex;
+  flex-direction: row;
+  max-width: 600px;
+}
+.modal > img {
+  width: 500px;
+}
+
+.sidebar {
+  min-width: 300px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.profile-pic {
+  width: 30px;
+  margin-left: 10px;
+  height: 30px;
+  display: inline;
+  border-radius: 50%;
+}
+
+.user p {
+  display: inline;
+}
+
+.sidebar form {
+  margin: auto 0 0 0;
+  padding: 0;
+}

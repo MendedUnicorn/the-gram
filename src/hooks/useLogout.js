@@ -21,8 +21,6 @@ const useLogout = () => {
       await updateDocument(user.uid, { online: false });
       const userCredential = await signOut(auth);
 
-      console.log('logging out', userCredential);
-
       dispatch({ type: 'LOGOUT' });
 
       if (!isCancelled) {

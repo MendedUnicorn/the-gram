@@ -5,29 +5,13 @@ import { useFirestore } from '../hooks/useFirestore';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { doc, setDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import CommentInput from './CommentInput';
+import Buttons from './Buttons';
+import { Link } from 'react-router-dom';
 
 export default function Post({ data, error }) {
-  const [newComment, setNewComment] = useState('');
   const { updateDocument, response } = useFirestore('posts');
   const { user } = useAuthContext();
-
-  const handleComment = async (e) => {
-    e.preventDefault();
-    const commentToAdd = {
-      displayName: user.displayName,
-      content: newComment,
-      createdAt: Timestamp.fromDate(new Date()),
-      photoURL: user.photoURL,
-      id: Math.floor(Math.random() * new Date()),
-    };
-
-    await updateDocument(data.id, {
-      comments: [...data.comments, commentToAdd],
-    });
-    if (!response.error) {
-      setNewComment('');
-    }
-  };
 
   const handleLike = async (e) => {
     e.preventDefault();
@@ -44,25 +28,19 @@ export default function Post({ data, error }) {
         likes: [...data.likes, user.uid],
       });
     }
-    // add like to post - uid added to post
-    // add post id to user
   };
 
   return (
     <div className='post'>
       <div className='header'>
         <img src={data.profilePic} alt='profilepic' />
+
         <div className='username'>{data.userName}</div>
       </div>
-      <img src={data.imgUrl} alt='image post' className='image-post' />
-      <div className='buttons'>
-        <span className='material-icons' onClick={handleLike}>
-          {data.likes.includes(user.uid) ? 'favorite' : 'favorite_border'}
-        </span>
-        <span className='material-icons'>insert_comment</span>
-        <span className='material-icons'>share</span>
-        <span className='material-icons md-dark'>bookmark_border</span>
-      </div>
+      <Link to={`/p/${data.id}`} state={{ fromHome: true }}>
+        <img src={data.imgUrl} alt='image post' className='image-post' />{' '}
+      </Link>
+      <Buttons data={data} />
       <div className='likes'>
         <p>{data.likes.length} likes</p>
       </div>
@@ -80,17 +58,7 @@ export default function Post({ data, error }) {
           addSuffix: true,
         })}
       </p>
-      <label className='reply'>
-        <input
-          type='text'
-          placeholder='Make a comment...'
-          onChange={(e) => setNewComment(e.target.value)}
-          value={newComment}
-        />
-        <button className='btn' onClick={handleComment}>
-          Publish
-        </button>
-      </label>
+      <CommentInput data={data} />
     </div>
   );
 }

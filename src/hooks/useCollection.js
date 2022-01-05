@@ -1,24 +1,30 @@
-import { collection, onSnapshot, where } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  where,
+  query,
+  orderBy,
+} from 'firebase/firestore';
 import { useEffect, useRef } from 'react';
 import { useState } from 'react/cjs/react.development';
 import { db } from '../firebase/config';
 
-const useCollection = (col, _query, _orderBy) => {
+const useCollection = (col, _q, _order) => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const query = useRef(_query).current;
-  const orderBy = useRef(_orderBy).current;
+  const q = useRef(_q).current;
+  const order = useRef(_order).current;
 
   useEffect(() => {
-    const ref = collection(db, col);
+    let ref = collection(db, col);
 
-    if (query) {
-      ref = query(ref, where(...query));
+    if (q) {
+      ref = query(ref, where(...q));
     }
-    if (orderBy) {
-      ref = query(ref, orderBy(...orderBy));
+    if (order) {
+      ref = query(ref, orderBy(...order));
     }
 
     const unsub = onSnapshot(

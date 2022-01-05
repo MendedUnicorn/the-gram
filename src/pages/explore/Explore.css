@@ -1,0 +1,19 @@
+.explore {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.explore .pic {
+  margin: 10px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.pic img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+}

@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   Timestamp,
   updateDoc,
@@ -94,11 +95,22 @@ const useFirestore = (col) => {
     }
   };
 
+  const deleteDocument = async (id) => {
+    dispatch({ type: 'IS_PENDING' });
+    try {
+      const docRef = doc(db, col, id);
+      const deletedDocument = await deleteDoc(docRef);
+    } catch (error) {
+      console.log(error.message);
+      dispatch({ type: 'ERROR', payload: error.message });
+    }
+  };
+
   useEffect(() => {
     return () => setIsCancelled(true);
   }, []);
 
-  return { addDocument, updateDocument, response };
+  return { addDocument, updateDocument, deleteDocument, response };
 };
 
 export { useFirestore };

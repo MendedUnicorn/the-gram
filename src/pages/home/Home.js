@@ -3,14 +3,14 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useCollection } from '../../hooks/useCollection';
 import './Home.css';
 
-export default function Home() {
+export default function Home({ children }) {
   const { user } = useAuthContext();
-  const { data, error } = useCollection('posts');
-  console.log('data for ', data);
+  const { data, error } = useCollection('posts', null, ['createdAt', 'desc']);
+
   return (
-    <div>
-      {user && <h1>Welcome, {user.displayName}</h1>}
+    <div className='home'>
       {data && data.map((d) => <Post key={d.id} data={d} error={error} />)}
+      {children}
     </div>
   );
 }

@@ -2,16 +2,18 @@ import './Login.css';
 
 import { useState } from 'react';
 import { useLogin } from '../../hooks/useLogin';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, error, isPending } = useLogin();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(email, password);
-    console.log(email, password);
+    await login(email, password);
+    navigate('/');
   };
 
   return (

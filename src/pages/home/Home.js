@@ -9,7 +9,7 @@ export default function Home({ children }) {
 
   return (
     <div className='home'>
-      {data && data.map((d) => <Post key={data.id} data={d} error={error} />)}
+      {data && data.map((d) => <Post key={d.id} data={d} error={error} />)}
       {children}
     </div>
   );

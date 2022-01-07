@@ -22,7 +22,6 @@ export default function PostModal() {
   const location = useLocation();
   const { deleteDocument } = useFirestore('posts');
   const { user } = useAuthContext();
-  console.log('user', user);
 
   if (error) {
     return <div className='error'>{error}</div>;

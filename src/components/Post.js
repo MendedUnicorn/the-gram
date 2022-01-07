@@ -8,27 +8,12 @@ import { db } from '../firebase/config';
 import CommentInput from './CommentInput';
 import Buttons from './Buttons';
 import { Link } from 'react-router-dom';
+import LikesModal from './LikesModal';
 
 export default function Post({ data, error }) {
   const { updateDocument, response } = useFirestore('posts');
   const { user } = useAuthContext();
-
-  const handleLike = async (e) => {
-    e.preventDefault();
-
-    //if user already likes post - remove like
-    if (data.likes.includes(user.uid)) {
-      console.log('already liked');
-      await updateDocument(data.id, {
-        likes: data.likes.filter((id) => id !== user.uid),
-      });
-    } else {
-      console.log('new like', user.uid);
-      await updateDocument(data.id, {
-        likes: [...data.likes, user.uid],
-      });
-    }
-  };
+  const [showLikesModal, setShowLikesModal] = useState(false);
 
   const handleDeleteComment = (e) => {
     e.preventDefault(e);
@@ -41,20 +26,31 @@ export default function Post({ data, error }) {
     });
   };
 
+  const handleShowLikes = (e) => {
+    e.preventDefault();
+    setShowLikesModal((prev) => setShowLikesModal(!prev));
+  };
+
   return (
     data && (
       <div className='post'>
-        <div className='header'>
+        {showLikesModal && (
+          <LikesModal
+            likes={data.likes}
+            setShowLikesModal={setShowLikesModal}
+          />
+        )}
+        <Link to={`/profile/${data.uid}`} className='header'>
           <img src={data.profilePic} alt='profilepic' />
 
           <div className='username'>{data.userName}</div>
-        </div>
+        </Link>
         <Link to={`/p/${data.id}`} state={{ fromHome: true }}>
           <img src={data.imgUrl} alt='from post' className='image-post' />
         </Link>
         <Buttons data={data} />
         <div className='likes'>
-          <p>{data.likes?.length} likes</p>
+          <p onClick={handleShowLikes}>{data.likes?.length} likes</p>
         </div>
         <p className='description'>{data.description}</p>
         <div className='comments'>
@@ -64,7 +60,7 @@ export default function Post({ data, error }) {
               {user.displayName === comment.displayName && (
                 <span
                   onClick={handleDeleteComment}
-                  class='material-icons delete'
+                  className='material-icons delete'
                   commentid={comment.id}
                 >
                   delete_outline

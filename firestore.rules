@@ -12,6 +12,8 @@ service cloud.firestore {
       allow update: if(request.resource.data.diff(resource.data).affectedKeys().hasOnly(["comments"]))
       // can update only your own documents:
       allow update, delete: if request.auth.uid == resource.data.uid
+      // can update your like on a post
+      allow update: if(request.resource.data.diff(resource.data).affectedKeys().hasOnly(["likes"]))
     }
     
   }
